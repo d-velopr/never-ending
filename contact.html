@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Never Ending A&R · Send your music</title>
+<meta name="description" content="Submit your music to Never Ending A&R — independent artist development out of Los Angeles. Upload a demo or drop a link and start a conversation." />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<meta property="og:title" content="Contact — Never Ending A&R" />
+<meta property="og:description" content="Send your music to Never Ending A&R. Independent artist development, Los Angeles." />
+<meta property="og:type" content="website" />
+<meta name="robots" content="index,follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500;1,9..144,900&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="glow" aria-hidden="true"></div>
+
+<!-- NAV -->
+<header class="nav" id="top">
+  <a class="brand" href="index.html" aria-label="Never Ending home">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 64 32" width="34" height="17"><path d="M16 28C8.3 28 3 23.6 3 16S8.3 4 16 4c6 0 9.6 3.4 16 12 6.4 8.6 10 12 16 12 7.7 0 13-4.4 13-12S55.7 4 48 4c-6 0-9.6 3.4-16 12-6.4 8.6-10 12-16 12Z" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></svg>
+    </span>
+    <span class="brand-text">NEVER ENDING<em>A&amp;R</em></span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="index.html#work">What I Do</a>
+    <a href="index.html#case">YFEGUERO</a>
+    <a href="index.html#proof">The Receipts</a>
+    <a href="index.html#team">Team</a>
+  </nav>
+  <a class="btn btn-ghost nav-cta" href="index.html">← Back to site</a>
+</header>
+
+<main>
+  <section class="section contact-page">
+    <div class="contact-layout">
+
+      <!-- LEFT: pitch -->
+      <div class="contact-pitch reveal" data-d="0">
+        <p class="kicker">// Let's work</p>
+        <h1 class="contact-title">Got an artist worth building?<br /><span class="serif-italic">Send the music.</span></h1>
+        <p class="contact-lede">Independent artists, producers, and managers — drop your best record (or a link to it) and a line about what you're building. Everything lands with me directly.</p>
+        <ul class="contact-points">
+          <li><span class="cp-dot" aria-hidden="true"></span> A&amp;R, publishing, splits, registration &amp; marketing — the whole machine.</li>
+          <li><span class="cp-dot" aria-hidden="true"></span> Independent only. No label required, no advance taken.</li>
+          <li><span class="cp-dot" aria-hidden="true"></span> Based in Northeast LA · working everywhere.</li>
+        </ul>
+        <p class="contact-alt">Prefer email? <a href="mailto:dvelupr@proton.me?subject=Let%27s%20work%20—%20Never%20Ending%20A%26R">dvelupr@proton.me</a></p>
+      </div>
+
+      <!-- RIGHT: form -->
+      <div class="contact-card reveal" data-d="1">
+        <form id="contactForm" novalidate>
+          <!-- honeypot -->
+          <div class="hp" aria-hidden="true">
+            <label>Company<input type="text" name="company" tabindex="-1" autocomplete="off" /></label>
+          </div>
+
+          <div class="field">
+            <label for="f-name">Your name <span class="req">*</span></label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required />
+          </div>
+
+          <div class="field">
+            <label for="f-artist">Artist / stage name <span class="req">*</span></label>
+            <input id="f-artist" name="artist" type="text" required />
+          </div>
+
+          <div class="field">
+            <label for="f-email">Email <span class="req">*</span></label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required />
+          </div>
+
+          <div class="field">
+            <label for="f-links">Links <span class="opt">— Spotify, Instagram, etc.</span></label>
+            <input id="f-links" name="links" type="text" inputmode="url" placeholder="https://open.spotify.com/artist/…" />
+            <p class="field-note" id="links-note"></p>
+          </div>
+
+          <div class="field">
+            <label for="f-message">What you're working on <span class="opt">— optional</span></label>
+            <textarea id="f-message" name="message" rows="4" placeholder="Tell me about the record, the rollout, the goal…"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="f-file">Music file <span class="opt">— optional · mp3/wav/m4a · max 25 MB</span></label>
+            <label class="dropzone" id="dropzone" for="f-file">
+              <input id="f-file" name="file" type="file" accept=".mp3,.wav,.m4a,audio/mpeg,audio/wav,audio/x-wav,audio/mp4,audio/x-m4a" />
+              <span class="dz-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0 4 4m-4-4-4 4"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+              </span>
+              <span class="dz-text" id="dz-text">Drop a track or <u>browse</u></span>
+            </label>
+            <p class="field-note" id="file-note">Files are virus-scanned by Google Drive before your demo is shared.</p>
+          </div>
+
+          <button class="btn btn-gold btn-lg form-submit" type="submit" id="submitBtn">Send it →</button>
+
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          <p class="form-fine">By submitting you agree we may listen to and review your material. We don't share it publicly.</p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="foot-brand">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 64 32" width="30" height="15"><path d="M16 28C8.3 28 3 23.6 3 16S8.3 4 16 4c6 0 9.6 3.4 16 12 6.4 8.6 10 12 16 12 7.7 0 13-4.4 13-12S55.7 4 48 4c-6 0-9.6 3.4-16 12-6.4 8.6-10 12-16 12Z" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></svg>
+    </span>
+    NEVER ENDING A&amp;R LLC
+  </div>
+  <p class="foot-meta">Independent artist development · Los Angeles, CA</p>
+  <div class="socials" aria-label="YFEGUERO on social">
+    <a class="social" href="https://instagram.com/youngflyess" target="_blank" rel="noopener" aria-label="Instagram — @youngflyess">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a class="social" href="https://tiktok.com/@youngflyess" target="_blank" rel="noopener" aria-label="TikTok — @youngflyess">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M16.5 3a5.6 5.6 0 0 0 4 1.9V8.1a8.8 8.8 0 0 1-4-1.05v6.45a5.5 5.5 0 1 1-5.5-5.5c.3 0 .6.02.9.07v3.12a2.5 2.5 0 1 0 1.6 2.33V3h3Z"/></svg>
+    </a>
+    <a class="social" href="https://x.com/YoungFlyEss" target="_blank" rel="noopener" aria-label="X — @YoungFlyEss">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M18.2 2H21l-6.6 7.5L22 22h-6.3l-4.9-6.4L5.1 22H2.3l7.1-8.1L2 2h6.4l4.4 5.9L18.2 2Zm-1.1 18h1.7L7 3.8H5.2L17.1 20Z"/></svg>
+    </a>
+    <a class="social" href="https://on.soundcloud.com/bAfDRpKDaygoxPuud" target="_blank" rel="noopener" aria-label="SoundCloud">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13v4M6 11v6M9 9.5v7.5M12 8v9h6.4a3 3 0 0 0 .1-6 5 5 0 0 0-6.5-4"/></svg>
+    </a>
+  </div>
+  <p class="foot-copy">© 2026 Never Ending A&amp;R LLC. All rights reserved.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

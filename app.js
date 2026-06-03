@@ -73,8 +73,209 @@
 
   /* ---- Subtle nav background shift on scroll ---- */
   var nav = document.querySelector(".nav");
-  window.addEventListener("scroll", function () {
-    if (window.scrollY > 40) nav.style.background = "rgba(10,9,8,.82)";
-    else nav.style.background = "rgba(10,9,8,.55)";
-  }, { passive: true });
+  if (nav) {
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > 40) nav.style.background = "rgba(10,9,8,.82)";
+      else nav.style.background = "rgba(10,9,8,.55)";
+    }, { passive: true });
+  }
+
+  /* ============================================================
+     CONTACT FORM — runs only on contact.html
+     Posts to a Google Apps Script web app that appends to a Sheet.
+     ============================================================ */
+  var form = document.getElementById("contactForm");
+  if (form) initContactForm(form);
+
+  function initContactForm(form) {
+    // ---- Paste your Apps Script Web App /exec URL here after deploying Code.gs ----
+    var FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbyofDFyE6zTBjJF3WUU-d20SkBL6wLTGWe2rfxYyC-Ps7LBp45yJlEv3zSyYt0Cn_Ln/exec";
+
+    var MAX_BYTES = 25 * 1024 * 1024;          // 25 MB cap
+    var ALLOWED_EXT = ["mp3", "wav", "m4a"];
+    var LINK_ALLOW = [
+      "soundcloud.com", "spotify.com", "music.apple.com", "apple.com",
+      "youtube.com", "youtu.be", "drive.google.com", "dropbox.com",
+      "wetransfer.com", "instagram.com", "tiktok.com", "x.com",
+      "twitter.com", "audiomack.com", "bandcamp.com", "distrokid.com"
+    ];
+
+    var fileInput = document.getElementById("f-file");
+    var dropzone = document.getElementById("dropzone");
+    var dzText = document.getElementById("dz-text");
+    var fileNote = document.getElementById("file-note");
+    var linksInput = document.getElementById("f-links");
+    var linksNote = document.getElementById("links-note");
+    var statusEl = document.getElementById("formStatus");
+    var submitBtn = document.getElementById("submitBtn");
+
+    var selectedFile = null;
+
+    function extOf(name) { return (name.split(".").pop() || "").toLowerCase(); }
+    function prettySize(b) { return (b / 1048576).toFixed(1) + " MB"; }
+
+    function setNote(el, msg, cls) {
+      el.textContent = msg || "";
+      el.className = "field-note" + (cls ? " " + cls : "");
+    }
+
+    // ---- File selection / validation ----
+    function handleFile(file) {
+      if (!file) { clearFile(); return; }
+      var ext = extOf(file.name);
+      var typeOk = file.type.indexOf("audio") === 0 || ALLOWED_EXT.indexOf(ext) !== -1;
+      if (!typeOk) {
+        clearFile();
+        setNote(fileNote, "That's not an audio file — use mp3, wav, or m4a.", "bad");
+        return;
+      }
+      if (file.size > MAX_BYTES) {
+        clearFile();
+        setNote(fileNote, "File is " + prettySize(file.size) + " — over the 25 MB cap. Paste a Drive/SoundCloud link in the Links field instead.", "warn");
+        if (linksInput) linksInput.focus();
+        return;
+      }
+      selectedFile = file;
+      dropzone.classList.add("has-file");
+      dzText.innerHTML = "✓ " + escapeHtml(file.name) + " <u>change</u>";
+      setNote(fileNote, prettySize(file.size) + " · scanned by Google Drive before it's shared.", "");
+    }
+
+    function clearFile() {
+      selectedFile = null;
+      if (fileInput) fileInput.value = "";
+      dropzone.classList.remove("has-file");
+      dzText.innerHTML = "Drop a track or <u>browse</u>";
+    }
+
+    fileInput.addEventListener("change", function () { handleFile(fileInput.files[0]); });
+
+    // drag & drop
+    ["dragenter", "dragover"].forEach(function (ev) {
+      dropzone.addEventListener(ev, function (e) { e.preventDefault(); dropzone.classList.add("drag"); });
+    });
+    ["dragleave", "drop"].forEach(function (ev) {
+      dropzone.addEventListener(ev, function (e) { e.preventDefault(); dropzone.classList.remove("drag"); });
+    });
+    dropzone.addEventListener("drop", function (e) {
+      var f = e.dataTransfer && e.dataTransfer.files[0];
+      if (f) { try { fileInput.files = e.dataTransfer.files; } catch (_) {} handleFile(f); }
+    });
+
+    // ---- Link allowlist check ----
+    function badLinks(value) {
+      var urls = (value || "").match(/https?:\/\/[^\s,]+/gi) || [];
+      var bad = [];
+      urls.forEach(function (u) {
+        var host;
+        try { host = new URL(u).hostname.toLowerCase().replace(/^www\./, ""); }
+        catch (_) { bad.push(u); return; }
+        var ok = LINK_ALLOW.some(function (d) { return host === d || host.endsWith("." + d); });
+        if (!ok) bad.push(host);
+      });
+      return bad;
+    }
+
+    if (linksInput) {
+      linksInput.addEventListener("blur", function () {
+        var bad = badLinks(linksInput.value);
+        if (bad.length) setNote(linksNote, "Unrecognized link host: " + bad.join(", ") + ". Use Spotify, SoundCloud, YouTube, Drive, Dropbox, WeTransfer, etc.", "warn");
+        else setNote(linksNote, "", "");
+      });
+    }
+
+    // ---- Helpers ----
+    function escapeHtml(s) { return s.replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+
+    function markInvalid(el, bad) { el.classList[bad ? "add" : "remove"]("invalid"); }
+
+    function readBase64(file) {
+      return new Promise(function (resolve, reject) {
+        var r = new FileReader();
+        r.onload = function () { resolve(String(r.result).split(",")[1] || ""); };
+        r.onerror = reject;
+        r.readAsDataURL(file);
+      });
+    }
+
+    function setStatus(msg, cls) {
+      statusEl.textContent = msg || "";
+      statusEl.className = "form-status" + (cls ? " " + cls : "");
+    }
+
+    // ---- Submit ----
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      setStatus("", "");
+
+      // honeypot
+      if (form.company && form.company.value) return;
+
+      var name = form.name.value.trim();
+      var artist = form.artist.value.trim();
+      var email = form.email.value.trim();
+      var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      markInvalid(form.name, !name);
+      markInvalid(form.artist, !artist);
+      markInvalid(form.email, !emailOk);
+      if (!name || !artist || !emailOk) {
+        setStatus("Fill in your name, artist name, and a valid email.", "err");
+        return;
+      }
+
+      var bad = badLinks(linksInput ? linksInput.value : "");
+      if (bad.length) {
+        markInvalid(linksInput, true);
+        setStatus("Remove or fix the unrecognized link before sending.", "err");
+        return;
+      }
+      markInvalid(linksInput, false);
+
+      if (FORM_ENDPOINT.indexOf("PASTE_YOUR") === 0) {
+        setStatus("Form isn't connected yet — endpoint not configured.", "err");
+        return;
+      }
+
+      submitBtn.setAttribute("disabled", "true");
+      setStatus("Sending…", "");
+
+      var payload = {
+        name: name, artist: artist, email: email,
+        links: linksInput ? linksInput.value.trim() : "",
+        message: form.message.value.trim(),
+        fileName: "", fileMime: "", fileData: ""
+      };
+
+      var prep = selectedFile
+        ? readBase64(selectedFile).then(function (b64) {
+            payload.fileName = selectedFile.name;
+            payload.fileMime = selectedFile.type || "audio/mpeg";
+            payload.fileData = b64;
+          })
+        : Promise.resolve();
+
+      prep.then(function () {
+        return fetch(FORM_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+      }).then(function (res) {
+        return res.json().catch(function () { return { ok: res.ok }; });
+      }).then(function (data) {
+        if (data && data.ok) {
+          form.reset(); clearFile();
+          setStatus("Got it — your music's in. I'll be in touch.", "ok");
+          submitBtn.textContent = "Sent ✓";
+        } else {
+          throw new Error((data && data.error) || "rejected");
+        }
+      }).catch(function () {
+        submitBtn.removeAttribute("disabled");
+        setStatus("Something went wrong sending that. Try again, or email dvelupr@proton.me.", "err");
+      });
+    });
+  }
 })();
