@@ -392,6 +392,15 @@ body.menu-open{overflow:hidden}
 .yt-embed{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;
   border:1px solid var(--line);background:#000;box-shadow:0 30px 60px -30px rgba(0,0,0,.85)}
 .yt-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-facade{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;cursor:pointer;background:#000;display:block;overflow:hidden}
+.yt-facade img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease),filter .35s}
+.yt-facade::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 50%,transparent,rgba(10,9,8,.35))}
+.yt-facade:hover img{transform:scale(1.04);filter:brightness(1.05)}
+.yt-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);transition:transform .3s var(--ease)}
+.yt-play svg{display:block;filter:drop-shadow(0 6px 18px rgba(0,0,0,.5))}
+.yt-play-bg{fill:#212121;fill-opacity:.82;transition:fill .3s,fill-opacity .3s}
+.yt-facade:hover .yt-play{transform:translate(-50%,-50%) scale(1.08)}
+.yt-facade:hover .yt-play-bg{fill:#ff0033;fill-opacity:1}
 .follow-sub{align-self:flex-start}
 .follow-links{display:flex;flex-direction:column;gap:.8rem}
 .follow-btn{display:flex;align-items:center;gap:1rem;padding:.95rem 1.15rem;border-radius:14px;

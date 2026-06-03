@@ -105,6 +105,24 @@
     });
   }
 
+  /* ---- YouTube facade: click thumbnail to load the player ---- */
+  var ytFacade = document.getElementById("ytFacade");
+  if (ytFacade) {
+    ytFacade.addEventListener("click", function () {
+      var id = ytFacade.getAttribute("data-id");
+      var ifr = document.createElement("iframe");
+      ifr.src = "https://www.youtube-nocookie.com/embed/" + id +
+        "?autoplay=1&rel=0&playsinline=1";
+      ifr.title = "YFEGUERO on YouTube";
+      ifr.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      ifr.referrerPolicy = "strict-origin-when-cross-origin";
+      ifr.setAttribute("frameborder", "0");
+      ifr.allowFullscreen = true;
+      var wrap = ytFacade.parentNode;       // .yt-embed
+      wrap.replaceChild(ifr, ytFacade);
+    });
+  }
+
   /* ============================================================
      CONTACT FORM — runs only on contact.html
      Posts to a Google Apps Script web app that appends to a Sheet.
