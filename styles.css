@@ -401,7 +401,7 @@ body.menu-open{overflow:hidden}
 .yt-play-bg{fill:#212121;fill-opacity:.82;transition:fill .3s,fill-opacity .3s}
 .yt-facade:hover .yt-play{transform:translate(-50%,-50%) scale(1.08)}
 .yt-facade:hover .yt-play-bg{fill:#ff0033;fill-opacity:1}
-.follow-sub{align-self:flex-start}
+.follow-sub{align-self:center}
 .follow-links{display:flex;flex-direction:column;gap:.8rem}
 .follow-btn{display:flex;align-items:center;gap:1rem;padding:.95rem 1.15rem;border-radius:14px;
   background:linear-gradient(180deg,var(--panel),var(--bg-2));border:1px solid var(--line-2);
