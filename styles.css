@@ -180,6 +180,15 @@ main,.nav,.footer,.marquee{position:relative;z-index:2}
 .case-story p strong{color:var(--ink)}
 .case-story p em{color:var(--gold-bright);font-style:italic}
 .case-story .btn{margin-top:.8rem}
+.press-feature{display:flex;flex-direction:column;gap:.35rem;position:relative;
+  margin:.4rem 0 1.4rem;padding:1rem 2.6rem 1rem 1.1rem;border-radius:12px;
+  border:1px solid var(--line);border-left:3px solid var(--gold);background:rgba(201,162,75,.05);
+  transition:background .35s,border-color .35s,transform .35s var(--ease)}
+.press-feature:hover{background:rgba(201,162,75,.1);transform:translateY(-2px)}
+.pf-label{font-family:"Space Mono",monospace;font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold)}
+.pf-title{font-family:"Fraunces",serif;font-style:italic;font-weight:500;font-size:1.05rem;color:var(--ink);line-height:1.32}
+.pf-go{position:absolute;right:1rem;top:1rem;color:var(--gold-bright);font-size:1.05rem;transition:transform .35s var(--ease)}
+.press-feature:hover .pf-go{transform:translate(2px,-2px)}
 .case-portrait{border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 60px -28px rgba(0,0,0,.8)}
 .case-portrait img{width:100%;aspect-ratio:3/3.4;object-fit:cover;object-position:center 25%}
 
