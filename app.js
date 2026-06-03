@@ -30,7 +30,7 @@
   }
 
   /* ---- IntersectionObserver: reveal sections, fire counters + bars ---- */
-  var groups = ".section-head,.card,.bigstat,.receipt,.member,.player,.case-story,.case-portrait,.gallery figure";
+  var groups = ".section-head,.card,.bigstat,.receipt,.member,.player,.case-story,.case-portrait,.gallery figure,.follow-media,.follow-btn";
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (!e.isIntersecting) return;
@@ -78,6 +78,31 @@
       if (window.scrollY > 40) nav.style.background = "rgba(10,9,8,.82)";
       else nav.style.background = "rgba(10,9,8,.55)";
     }, { passive: true });
+  }
+
+  /* ---- Mobile menu (hamburger) ---- */
+  var navToggle = document.getElementById("navToggle");
+  var mobileMenu = document.getElementById("mobileMenu");
+  if (navToggle && mobileMenu) {
+    var setMenu = function (open) {
+      navToggle.classList.toggle("open", open);
+      mobileMenu.classList.toggle("open", open);
+      document.body.classList.toggle("menu-open", open);
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      mobileMenu.setAttribute("aria-hidden", open ? "false" : "true");
+    };
+    navToggle.addEventListener("click", function () {
+      setMenu(!mobileMenu.classList.contains("open"));
+    });
+    // close when a menu link/button is tapped
+    mobileMenu.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () { setMenu(false); });
+    });
+    // close on Escape
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && mobileMenu.classList.contains("open")) setMenu(false);
+    });
   }
 
   /* ============================================================
