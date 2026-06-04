@@ -96,12 +96,12 @@ main,.nav,.footer,.marquee{position:relative;z-index:2}
   padding:clamp(3rem,8vw,6.5rem) clamp(1.2rem,4vw,3rem) clamp(2rem,5vw,4rem);
   display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4rem);align-items:center;
 }
-.hero-copy{max-width:42ch}
+.hero-copy{max-width:560px}
 .hero h1{
   font-family:"Fraunces",serif;font-weight:900;line-height:.96;letter-spacing:-.02em;
-  font-size:clamp(2.9rem,7vw,5.2rem);margin:.4rem 0 1.3rem;
+  font-size:clamp(2.9rem,7vw,5.2rem);margin:.4rem 0 1.3rem;text-wrap:balance;
 }
-.lede{color:#cbc3b4;font-size:1.06rem;margin-bottom:2rem}
+.lede{color:#cbc3b4;font-size:1.06rem;margin-bottom:2rem;max-width:46ch}
 .hero-cta{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2.6rem}
 .hero-stats{display:flex;gap:2.2rem;flex-wrap:wrap;padding-top:1.8rem;border-top:1px solid var(--line-2)}
 .hero-stats dt{font-family:"Fraunces",serif;font-weight:900;font-size:2rem;color:var(--gold-bright);line-height:1}
@@ -148,7 +148,7 @@ main,.nav,.footer,.marquee{position:relative;z-index:2}
 .section-head{max-width:780px;margin-bottom:clamp(2.4rem,5vw,3.6rem)}
 .section-head h2{
   font-family:"Fraunces",serif;font-weight:600;line-height:1.04;letter-spacing:-.01em;
-  font-size:clamp(1.9rem,4.4vw,3.2rem);margin-top:1rem;
+  font-size:clamp(1.9rem,4.4vw,3.2rem);margin-top:1rem;text-wrap:balance;
 }
 
 /* ---- CARDS ---- */
@@ -269,7 +269,7 @@ main,.nav,.footer,.marquee{position:relative;z-index:2}
 .contact-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,5vw,4rem);align-items:start}
 .contact-pitch{position:sticky;top:96px}
 .contact-title{font-family:"Fraunces",serif;font-weight:600;line-height:1.04;letter-spacing:-.01em;
-  font-size:clamp(2.1rem,4.6vw,3.4rem);margin:1rem 0 1.3rem}
+  font-size:clamp(2.1rem,4.6vw,3.4rem);margin:1rem 0 1.3rem;text-wrap:balance}
 .contact-lede{color:#cbc3b4;font-size:1.06rem;margin-bottom:1.8rem;max-width:42ch}
 .contact-points{list-style:none;display:flex;flex-direction:column;gap:.9rem;margin-bottom:1.8rem}
 .contact-points li{display:flex;gap:.7rem;align-items:baseline;color:#b8b0a2;font-size:.97rem;line-height:1.45}
@@ -333,7 +333,7 @@ main,.nav,.footer,.marquee{position:relative;z-index:2}
 /* ---- CONTACT ---- */
 .contact{text-align:center}
 .contact-inner{max-width:680px;margin:0 auto}
-.contact-h{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.02;margin:1rem 0 1.4rem}
+.contact-h{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.02;margin:1rem 0 1.4rem;text-wrap:balance}
 .contact-sub{color:#c4bcae;margin-bottom:2.2rem;font-size:1.08rem}
 
 /* ---- FOOTER ---- */
