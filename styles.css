@@ -85,9 +85,6 @@ main,.nav,.footer,.marquee{position:relative;z-index:2}
 .brand-mark{color:var(--gold-bright);display:flex}
 .brand-text{font-family:"Space Mono",monospace;font-weight:700;letter-spacing:.12em;font-size:.92rem;display:flex;align-items:baseline;gap:.5em}
 .brand-text em{font-style:normal;color:var(--gold);font-size:.7em;letter-spacing:.18em}
-.nav-links{display:flex;gap:2rem}
-.nav-links a{font-family:"Space Mono",monospace;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);transition:color .3s}
-.nav-links a:hover{color:var(--gold-bright)}
 .nav-cta{padding:.7em 1.2em}
 
 /* ---- HERO ---- */
@@ -370,10 +367,6 @@ main,.nav,.footer,.marquee{position:relative;z-index:2}
   transition:opacity .3s,transform .35s var(--ease),visibility .3s;
 }
 .mobile-menu.open{opacity:1;visibility:visible;transform:none}
-.mm-links{display:flex;flex-direction:column}
-.mm-links a{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.7rem,7vw,2.2rem);
-  color:var(--ink);padding:.55rem 0;border-bottom:1px solid var(--line-2)}
-.mm-links a:active,.mm-links a:hover{color:var(--gold-bright)}
 .mm-cta{width:100%;justify-content:center;margin-top:1.3rem}
 .mm-follow-label{font-family:"Space Mono",monospace;font-size:.7rem;letter-spacing:.16em;
   text-transform:uppercase;color:var(--muted-2);text-align:center;margin-top:1.8rem}
@@ -436,7 +429,7 @@ body.menu-open{overflow:hidden}
 @media(max-width:980px){
   .hero{grid-template-columns:1fr;text-align:left}
   .hero-media{justify-self:stretch;max-width:460px}
-  .nav-links,.nav-cta{display:none}
+  .nav-cta{display:none}
   .nav-toggle{display:flex}
   .follow-grid{grid-template-columns:1fr}
   .cards,.team-grid,.players{grid-template-columns:1fr 1fr}
